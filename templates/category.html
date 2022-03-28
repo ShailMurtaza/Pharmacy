@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Category</title>
+{% endblock %}
+
+{% block body %}
+
+<!--Trigger/Open The Modal>
+<button id="myBtn" class="btn btn-primary space">Add New Category</button>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">CLOSE</span><pre>THIS
+  </pre></div>
+</div-->
+<script>
+$(document).ready(function() {
+  new jBox('Modal', {attach: '#ModalAnimation', animation: 'tada', title: 'Add New Category', width: 350, content: '<center><form action="/category" method="post"><input type="text" placeholder="Medicine Category" name="medicine_category"><br><input type="submit" value="Add!" class="btn btn-primary space"></form></center>', addClass: 'jBox-AnimationDemo', blockScrollAdjust: ['header']});
+});
+</script>
+<span class="btn btn-primary space" id="ModalAnimation">Add New Category</span>
+
+<table class="table table-hover" border="1">
+  <thead class="table-dark">
+  <tr><th scope="col">#</th><th scope="col">Categories</th><th scope="col">Actions</th></tr>
+  </thead>
+  <tbody>
+  {% for i in range(l|length) %}
+  <tr><th>{{i+1}}</th><td>{{ l[i].category }}</td>
+  <td>
+
+  <script>
+$(document).ready(function() {
+  new jBox('Modal', {attach: '#myModalAnimation{{l[i].id}}', animation: 'tada', title: 'Update Category', width: 350, content: '<center><form action="/category/update/{{l[i].id}}" method="post"><input type="text" placeholder="Medicine Category" name="medicine_category" value="{{l[i].category}}"><br><input type="submit" value="Update!" class="btn btn-primary space"></form></center>', addClass: 'jBox-AnimationDemo', blockScrollAdjust: ['header']});
+});
+</script>
+<span class="btn btn-primary space butn" id="myModalAnimation{{l[i].id}}">Update</span>
+  <a class="btn btn-danger butn" href="/category/delete/{{ l[i].id }}" data-confirm="Do you really want to delete this record?">Delete</a></td>
+  </tr>
+  </tbody>
+  {% endfor %}
+</table>
+
+
+
+
+<link rel="stylesheet" href="/static/css/pop_form.css">
+<script src="/static/javascripts/pop_form.js"></script>
+
+{% endblock %}

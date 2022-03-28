@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Bill Editor</title>
+<style>
+textarea, input {width:900px;}
+textarea {height:25%;}
+.table1 {
+    border: 2px solid black;
+    text-align:center;
+    width:20em
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<button id="myBtn" class="btn btn-primary space">Bill Preview</button>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">CLOSE</span>
+    {{ bill_starter }}
+    CUSTOMER NAME  ::::::  Customer Name<br>
+    Date And Time 2000-01-01 12:00:00.0000
+    <table class="table1">
+    <tr class="table1"><th class="table1">Medicine</th><th class="table1">Quantity</th><th class="table1">Price</th></tr>
+    <tr class="table1"><td class="table1">Example1</td><td class="table1">1</td><td class="table1">100</td></tr>
+    <tr class="table1"><td class="table1">Example2</td><td class="table1">2</td><td class="table1">120</td></tr>
+    </table>
+    TOTAL ===================  340
+    {{bill_ender}}
+    CREATED BY SHAIL
+  </div>
+</div>
+<form action="/bill_editor" method="post">
+<textarea name="bill_starter" id="text1" placeholder="Enter Your Bill Starter">{{ bill_starter }}</textarea>
+<br><br>
+<textarea name="bill_ender" id="text2" placeholder="Enter Your Bill Ender">{{bill_ender}}</textarea>
+<br>
+<input type="submit" value="Update" class="btn btn-primary space">
+<br>
+<input type="button" value="Reset" class="btn btn-danger space" onclick='ClearFields();'>
+</form>
+<script>
+function ClearFields() {
+      document.getElementById("text1").value = "";
+      document.getElementById("text2").value = "";
+}
+</script>
+<link rel="stylesheet" href="/static/css/pop_form.css">
+<script src="/static/javascripts/pop_form.js"></script>
+{% endblock %}

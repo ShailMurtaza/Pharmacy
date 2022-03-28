@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Pharmacy</title>
+<!--link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+<link href="/static/css/select2.min.css" rel="stylesheet"/>
+<script src="/static/javascripts/select2.js"></script-->
+<!--link href="/static/css/sweet.css" rel="stylesheet"/>
+<script src="/static/javascripts/sweet.js"></script-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<style>
+.space {
+	margin: 2px 0px;
+}
+input {
+	width:100%
+}
+.table1 {
+    border: 2px solid black;
+    text-align:center;
+		width:20em
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<script>
+	var medi_names = [];
+	var medi_prices = [];
+	var medi_quantities = [];
+
+console.log(medi_names)
+console.log(medi_prices)
+console.log(medi_quantities)
+
+
+	{% for i in medi_names %}
+	        medi_names.push("{{ i.medicines }}")
+					medi_prices.push("{{ i.price }}")
+					medi_quantities.push("{{ i.quantity }}")
+	{% endfor %}
+	function medi_quantity() {
+		var input_name = (document.forms["bill_form"]["Name"].value.split(" | "));
+		var medi_name = input_name[0];
+		var total_qantity = parseInt(input_name[1]);
+		var price = input_name[2];
+		var required_qantity = parseInt(document.forms["bill_form"]["Quantity"].value);
+		if (!(input_name.length==3)) {
+			swal({
+				title: "Check your 'Medicine Name' man!",
+	  		icon: "error"});
+			return false;
+		}
+		if (!(medi_names.includes(medi_name) && medi_prices.includes(price) && medi_quantities.includes(total_qantity.toString()) )) {
+		swal({
+			title: "Check your 'Medicine Name' man!",
+  		icon: "error"});
+			return false;
+		}
+	// 	if (isNaN(total_qantity)) {
+	// 		//swal("Check your 'Medicine Name' man!")
+	// 		swal({
+  // title: "Check your 'Medicine Name' man!",
+  // //text: "You clicked the button!",
+  // icon: "error"});
+	// 		return false;
+	// 	}
+		else if (total_qantity < required_qantity) {
+			swal({
+				title:"Our stock is low man!",
+				icon: "warning"
+			});
+			return false;
+		}
+		return true;
+	}
+</script>
+
+<form action="/billing" method="post" onsubmit = "return(medi_quantity());" name="bill_form">
+<table >
+{% if disable is defined %}
+<tr><th>Customer Name</th><td><input type="text" name="Customer Name" required></td></tr>
+{% endif %}
+
+<tr><th>Medicine Name</th><td>
+<div class="searchable">
+<input type="text" placeholder="Enter Medicine" onkeyup="filterFunction(this,event)" name="Name" required><ul>
+{% for i in medi_names %}
+        <li>{{ i.medicines }} | {{ i.quantity }} | {{ i.price }}</li>
+{% endfor %}
+</ul></div>
+</td></tr>
+<tr><th>Medicine Discount %</th><td><input type="number" name="Discount" required></td></tr>
+<tr><th>Medicine Quantity</th><td><input type="number" name="Quantity" required></td></tr>
+<tr><th></th><td>
+<input type="Submit" value="Add!" class="btn btn-primary space" required><br>
+<!-- <a href="/making_bill" class="btn btn-primary hundred-per">Done!</a> -->
+<a href="/done_billing" class="btn btn-primary hundred-per">Done!</a>
+</td></tr>
+<!--tr><th></th><td></td></tr>
+<tr><th></th><td><a href="/making_bill" class="btn btn-primary hundred-per">Done!</a></td></tr-->
+</table>
+</form>
+<h4><span class='label'>BILL PREVIEW</span></h4>
+<!--pre><br>{{ table }}</pre-->
+{{table}}
+<h4><span class='label'>BILL EDITOR !</span></h4>
+<form action="/update_bill" method="post">
+<textarea name="data" style='width:100%;height:30%;'>{{ data }}</textarea><br>
+<input type="submit" value="update" class="btn btn-primary" style='width:6em'>
+</form>
+
+<!--script>$(".js-example-tags").select2();</script-->
+
+<!--script type="text/javascript">
+swal("A Basic JS alert by a plug-in");
+</script-->
+{% endblock %}

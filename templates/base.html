@@ -1,0 +1,89 @@
+<html><head>
+{% block head %}{% endblock %}
+<title>PHARMACY</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" href="/static/favicon.ico">
+<link rel="stylesheet" href= "/static/fonts/tangerine">
+<link rel='stylesheet' href="/static/fonts/merienda">
+<link rel="stylesheet" href="/static/css/bootstrap5/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/mine.css">
+<link rel="stylesheet" href="/static/css/select.css">
+
+<link rel="stylesheet" href="/static/pop/css/normalize.css">
+<link rel="stylesheet" href="/static/pop/dist/jBox.all.css">
+<link rel="stylesheet" href="/static/pop/css/demo.css">
+<link rel="stylesheet" href="/static/pop/css/playground-avatars.css">
+<link rel="stylesheet" href="/static/pop/css/playground-inception.css">
+<link rel="stylesheet" href="/static/pop/css/playground-login.css">
+<script src="/static/pop/js/jquery-3.5.0.js"></script>
+</head>
+{% block new %}
+{% endblock %}
+ <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/">PHARMACY</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data Player</a>
+        <div class="dropdown-menu dropdown" aria-labelledby="dropdown04">
+          <a class="dropdown-item item" href="/add_data">Add New Medicine</a>
+          <a class="dropdown-item item" href="/category">Category Editor</a>
+          <a class="dropdown-item item" href="/bill_editor">Bill Editor</a>
+        </div>
+        </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/search">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/initialize_billing">Billing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="myModalAnimation">Click Me For No Reason</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        <!--form class="form-inline mt-2 mt-md-0" method="" action="">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form-->
+        <a class="btn btn-outline-success my-2 my-sm-0" style="margin:1em;" href="/close" data-confirm="Do you wants to close app?">Close</a>
+      </div>
+    </nav><br><br><br>
+
+<body><div class="container">
+<!--hr style="width:37px;height:10%;background:red;">
+<hr style="width:2.3125em;height:10%;background:red;"-->
+<center><h1>
+<div class="fon"> Created by Shail </div>
+</h1>
+<!--font color="red"><h1>Python</h1></font><br-->
+
+{% block body %}
+{% endblock %}
+</center></div>
+<script>
+$(document).ready(function() {
+  new jBox('Modal', {attach: '#myModalAnimation', animation: 'flip', title: 'Who is creator??', content: '<div style="color:green;hover:white;">CREATED BY SHAIL!</div>', addClass: 'jBox-AnimationDemo', blockScrollAdjust: ['header']});
+});
+</script>
+<script type="text/javascript" src="/static/javascripts/select.js"></script>
+
+<!--script src="/static/javascripts/jquery-3.5.1.slim.min.js"></script-->
+<script src="/static/javascripts/bootstrap5/popper.min.js"></script>
+<script src="/static/javascripts/bootstrap5/bootstrap.min.js"></script>
+
+<script src="/static/pop/dist/jBox.all.js"></script>
+<script src="/static/pop/js/demo.js"></script>
+<script src="/static/pop/js/playground-avatars.js"></script>
+<script src="/static/pop/js/playground-inception.js"></script>
+<script src="/static/pop/js/playground-login.js"></script>
+
+</body></html>

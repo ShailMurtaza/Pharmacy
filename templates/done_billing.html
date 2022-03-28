@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Done Billing</title>
+<style>
+.btn {
+	 margin: 2px 2px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<script>
+  //window.open('/static/bills/bill{{name_num}}', '_blank');
+	window.open('/display/bill', '_blank');
+</script>
+Your bill is ready to print <br>
+<hr>
+{#<table id="table1">
+<th><pre>{{ bill }}</pre></th>
+</table>#}
+{{bill}}
+<hr>
+<a href='/update_bill' class="btn btn-primary">go back for some changing</a><br>
+<button class="btn btn-primary" onclick="window.open('/static/bills/bill{{name_num}}', '_blank');">BILL PDF</button>
+{% endblock %}

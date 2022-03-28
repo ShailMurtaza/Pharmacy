@@ -1,0 +1,41 @@
+<style>
+  body {
+    background: "white";
+    color: "black";
+  }
+  table, th, td {
+    border: 1px solid black;
+    width: 20em;
+    text-align:center;
+  }
+  .body{font-size:4.9vw;}
+</style>
+
+<div class="body">
+{{bill_starter}}
+{% for i in bill %}
+{% if loop.index==1 %}
+CUSTOMER NAME  ::::::  {{i[0]}}<br>
+Date And Time {{date_time}}<br><br>
+{% endif %}
+{% endfor %}
+<table class="body">
+  <thead>
+    <tr><th>Medicines</th><th>Discount</th><th>Quantity</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    {% for x in bill %}
+    {% if not loop.index==1 %}
+    <tr>{% for i in x %}<td>{{i}}</td>{% endfor %}</tr>
+    {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+<pre>
+    TOTAL ===================   {{total}}
+NET TOTAL ===================   {{discount}}
+</pre>
+{{bill_ender}}
+<br>
+CREATED BY SHAIL
+</div>

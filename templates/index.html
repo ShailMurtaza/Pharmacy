@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Pharmacy</title>
+<style>
+.check_expiry_true {
+	background:red;
+	color:white;
+}
+.check_expiry_false {
+	background:green;
+	color:white;
+}
+.check_expiry_true_false {
+	background:black;
+	color:white;
+}
+.hide {
+	display:none;
+}
+table > thead > tr > th {
+	  border:1px solid white;
+}
+table > tbody > tr > td {
+	  border:1px solid #DEE2E6FF;
+}
+
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+<form action="/" method="post">
+<h3><span class="label">Check To Hide</span></h3>
+<input type="checkbox" name="Medicines" id ="Medicines" value="hide" {{ checked.Medicines }} class="form-check-input"><label for="Medicines">Medicines</label>
+<input type="checkbox" name="formula" id ="Formula" value="hide" {{ checked.formula }} class="form-check-input"><label for="Formula">Formula</label>
+<input type="checkbox" name="category" id ="Category" value="hide" {{ checked.category }} class="form-check-input"><label for="Category">Category</label>
+<input type="checkbox" name="price" id ="Price" value="hide" {{ checked.price }} class="form-check-input"><label for="Price">Price</label>
+<input type="checkbox" name="quantity" id ="Quantity" value="hide" {{ checked.quantity }} class="form-check-input"><label for="Quantity">Quantity</label>
+<input type="checkbox" name="date_created" id ="date_created" value="hide" {{ checked.date_created }} class="form-check-input"><label for="date_created">Manufacture Date</label>
+<input type="checkbox" name="date_expiry" id ="date_expiry" value="hide" {{ checked.date_expiry }} class="form-check-input"><label for="date_expiry">Expiry Date</label>
+<input type="checkbox" name="status" id ="Status" value="hide" {{ checked.status }} class="form-check-input"><label for="Status">Status</label>
+<input type="checkbox" name="details" id ="Details" value="hide" {{ checked.details }} class="form-check-input"><label for="Details">Details</label>
+<input type="checkbox" name="actions" id ="actions" value="hide" {{ checked.actions }} class="form-check-input"><label for="actions">Actions</label>
+<input type="submit" value="Hide" class="">
+</form>
+
+
+<table class="table table-hover" border="1">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" class="{{ hide.Medicines }}">Medicines</th>
+      <th scope="col" class="{{ hide.formula }}">Formula</th>
+      <th scope="col" class="{{ hide.category }}">Category</th>
+			<th scope="col" class="{{ hide.quantity }}">Quantity</th>
+			<th scope="col" class="{{ hide.price }}">Price</th>
+      <th scope="col" class="{{ hide.date_created }}">Manufacture Date</th>
+      <th scope="col" class="{{ hide.date_expiry }}">Expiry Date</th>
+      <th scope="col" class="{{ hide.status }}">Status</th>
+      <th scope="col" class="{{ hide.details }}">Details</th>
+      <th scope="col" class="{{ hide.actions }}">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for i in range(l|length) %}
+    <tr>
+      <th scope="row">{{ i+1 }}</th>
+      <td class="{{ hide.Medicines }}">{{ l[i].medicines }}</td>
+      <td class="{{ hide.formula }}">{{ l[i].formula }}</td>
+      <td class="{{ hide.category }}">{{ l[i].category }}</td>
+			<td class="{{ hide.quantity }}">{{ l[i].quantity }}</td>
+			<td class="{{ hide.price }}">{{ l[i].price }}</td>
+      <td class="{{ hide.date_created }}">{{ l[i].date_created }}</td>
+      <td class="{{ hide.date_expiry }}">{{ l[i].date_expiry }}</td>
+      <td class="{{ hide.status }}">
+      {% if not l[i].date_expiry %}
+      	<h6 class="check_expiry_true_false">I don't know</h6>
+      {% else %}
+      {% if expired_or_not[i]=="Expired" %}
+      	<h6 class="check_expiry_true">{{ expired_or_not[i] }}</h6>
+      	{% else %}
+      	<h6 class="check_expiry_false">{{ expired_or_not[i] }}</h6>
+      {% endif %}
+      {% endif %}
+      </td>
+      {% if l[i].details=="" %}<td class="{{ hide.details }}">NOT ADDED!</td>
+      {% else %}               <td class="{{ hide.details }}">{{l[i].details}}</td>
+      {% endif %}
+     <td class="{{ hide.actions }}">
+	<a href="/pharmacy/update/{{ l[i].id }}" class="btn btn-primary butn space">Update</a>
+  	<!--a href="/pharmacy/delete/{{ l[i].id }}" onclick="return confirm('Are you sure you wants to delete this record?');" title="Delete record" class="btn btn-danger butn">Delete</a-->
+  <a  class="btn btn-danger butn" href="/pharmacy/delete/{{ l[i].id }}" data-confirm="Do you really want to delete this record?">Delete</a>
+      </td>
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

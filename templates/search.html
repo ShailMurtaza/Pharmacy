@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<form action="/" method="post">
+<h3><span class="label">Check To Hide</span></h3>
+<input type="checkbox" name="Medicines" id ="Medicines" value="hide" {{ checked.Medicines }} class="form-check-input"><label for="Medicines">Medicines</label>
+<input type="checkbox" name="formula" id ="Formula" value="hide" {{ checked.formula }} class="form-check-input"><label for="Formula">Formula</label>
+<input type="checkbox" name="category" id ="Category" value="hide" {{ checked.category }} class="form-check-input"><label for="Category">Category</label>
+<input type="checkbox" name="price" id ="Price" value="hide" {{ checked.price }} class="form-check-input"><label for="Price">Price</label>
+<input type="checkbox" name="quantity" id ="Quantity" value="hide" {{ checked.quantity }} class="form-check-input"><label for="Quantity">Quantity</label>
+<input type="checkbox" name="date_created" id ="date_created" value="hide" {{ checked.date_created }} class="form-check-input"><label for="date_created">Manufacture Date</label>
+<input type="checkbox" name="date_expiry" id ="date_expiry" value="hide" {{ checked.date_expiry }} class="form-check-input"><label for="date_expiry">Expiry Date</label>
+<input type="checkbox" name="status" id ="Status" value="hide" {{ checked.status }} class="form-check-input"><label for="Status">Status</label>
+<input type="checkbox" name="details" id ="Details" value="hide" {{ checked.details }} class="form-check-input"><label for="Details">Details</label>
+<input type="checkbox" name="actions" id ="actions" value="hide" {{ checked.actions }} class="form-check-input"><label for="actions">Actions</label>
+<input type="submit" value="Hide" class="">
+</form>
+
+{% endblock %}

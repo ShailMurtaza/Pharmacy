@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<title>Add Medicine</title>
+<link href="/static/css/select2.min.css" rel="stylesheet"/>
+<script src="/static/javascripts/select2.js"></script>
+<style>
+input, select, .href {
+	width:100%;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<script>
+	function ClearFields() {
+	      document.getElementById("text1").value = "";
+	      document.getElementById("text2").value = "";
+				document.getElementById("text3").value = "";
+				document.getElementById("text4").value = "";
+				document.getElementById("text5").value = "";
+				document.getElementById("text6").value = "";
+				document.getElementById("text7").value = "";
+				document.getElementById("text8").value = "Not Any!";
+	}
+</script>
+{% if path=="add_data" %}
+<form action="/add_data" method="POST">
+{% else %}
+<form action="/pharmacy/update/{{ update_data.id }}" method="POST">
+{% endif %}
+<table>
+<tr><th>Medicine Name</th><td><input type="text" name="medicine_name" placeholder="Medicine Name" value="{{ d.medicines }}" id="text6"></td></tr>
+
+<tr><th>Medicine Formula</th><td><input type="text" name="medicine_formula" value="{{ d.formula }}" placeholder="Medicine formula" id="text7"></td></tr>
+
+<tr><th>Medicine Category</th><td>
+<select name="medicine_category" class="js-example-tags hundred-per" id="text8">
+	<option>Not Any!</option>
+	{% for i in cat %}
+	{% if d.category==i.category %}
+	<option selected>{{i.category}}</option>
+	{% else %}
+	<option>{{i.category}}</option>
+	{% endif %}
+	{% endfor %}
+	<option>Others</option>
+</select>
+</td></tr>
+
+<tr><th>Quantity</th><td><input type="number" name="medicine_quantity" placeholder="Quantity" value="{{ d.quantity }}" id="text1"></td></tr>
+
+<tr><th>Price</th><td><input type="number" name="medicine_price" placeholder="Price" value="{{ d.price }}" id="text2"></td></tr>
+
+<tr><th>Medicine Manufacture Date</th><td><input type="date" name="medicine_manufacture_date" value="{{ d.created }}" placeholder="Medicine Manufacture Date" id="text3"></td></tr>
+
+<tr><th>Medicine Expiry Date</th><td><input type="date" name="medicine_expiry_date" value="{{ d.expiry }}" placeholder="Medicine Expiry Date" id="text4"></td></tr>
+
+<tr><th>Medicine Details</th><td><textarea type="text" name="medicine_details" placeholder="Medicine Details" class="hundred-per" style="height:80px;width:350px;" id="text5">{{ d.details }}</textarea></td></tr>
+
+<tr><th></th><td><input type="submit" class="btn btn-primary" value="ADD!"></td></tr>
+
+<tr><th></th><td><input type="button" value="Reset" class="btn btn-danger space" onclick='ClearFields();'></td></tr>
+</table>
+</form>
+{% endblock %}
