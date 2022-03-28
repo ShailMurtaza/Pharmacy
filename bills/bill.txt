@@ -1,7 +1,0 @@
-<h1>Bill Starter</h1>
-CUSTOMER NAME  ::::::  Asdf
-Date And Time 2020-07-07 21:13:10.509000
-<table class=table><tr><th class=table>Medicines</th><th>Price</th><th>Quantity</th></tr><tr><td class=table>Paracetamol</td><td>78</td><td>0</td></tr></table>
-TOTAL ===================   0
-<u><h1>Bill Ender</h1></u>
-CREATED BY SHAIL
